@@ -5,6 +5,7 @@
 
   <div class="card-body">
     <%= form_for @message do |f| %>
+      <%= hidden_field_tag :original_message_id, params[:id] %>
       <div class="form-group py-3">
         <%= f.text_area :body, class: "form-control", rows: 3 %>
       </div>
