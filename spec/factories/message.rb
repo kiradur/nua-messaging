@@ -5,6 +5,7 @@ FactoryBot.define do
     outbox
     inbox
 
+    read { false }
     created_at { Date.current.in_time_zone }
 
     trait :sent_1_week_ago do
