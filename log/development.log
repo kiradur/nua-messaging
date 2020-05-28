@@ -811,3 +811,135 @@ Processing by MessagesController#show as HTML
 Completed 200 OK in 28ms (Views: 25.8ms | ActiveRecord: 0.5ms)
 
 
+Started GET "/messages/1" for ::1 at 2020-05-28 10:45:40 +0300
+Started GET "/" for ::1 at 2020-05-28 10:45:40 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MessagesController#index as HTML
+Processing by MessagesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_patient" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_patient", "t"], ["LIMIT", 1]]
+  [1m[36mMessage Load (0.4ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering messages/show.html.erb within layouts/application
+  [1m[36mInbox Load (0.9ms)[0m  [1m[34mSELECT  "inboxes".* FROM "inboxes" WHERE "inboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[36mOutbox Load (0.4ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "messages" WHERE "messages"."inbox_id" = ?[0m  [["inbox_id", 1]]
+  Rendered messages/modals/_lost_prescription_modal.html.erb (1.0ms)
+  Rendered messages/show.html.erb within layouts/application (50.9ms)
+  Rendering messages/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_patient" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_patient", "t"], ["LIMIT", 1]]
+  [1m[36mMessage Load (0.4ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."inbox_id" = ? ORDER BY "messages"."created_at" DESC LIMIT ? OFFSET ?[0m  [["inbox_id", 1], ["LIMIT", 1], ["OFFSET", 0]]
+  [1m[36mOutbox Load (0.3ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered messages/index.html.erb within layouts/application (53.6ms)
+  Rendered navigation/_header.html.erb (2.9ms)
+  Rendered navigation/_header.html.erb (1.3ms)
+Completed 200 OK in 548ms (Views: 435.8ms | ActiveRecord: 4.3ms)
+
+
+Completed 200 OK in 549ms (Views: 499.9ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/messages/1" for ::1 at 2020-05-28 10:45:43 +0300
+Processing by MessagesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mMessage Load (0.4ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering messages/show.html.erb within layouts/application
+  [1m[36mOutbox Load (0.2ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered messages/modals/_lost_prescription_modal.html.erb (2.0ms)
+  Rendered messages/show.html.erb within layouts/application (11.3ms)
+  Rendered navigation/_header.html.erb (0.4ms)
+Completed 200 OK in 67ms (Views: 63.3ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/messages/1/lost_prescription" for ::1 at 2020-05-28 10:45:46 +0300
+Processing by MessagesController#lost_prescription as HTML
+  Parameters: {"authenticity_token"=>"6kj1Z0jJmXrByY8G7Pm2qngQPDc2C9naACtrW3RDI1e8lN+D00K0BMJi2hE0c6TPNnFSjWK+k97yHm0ys3NhUw==", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_patient" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_patient", "t"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_admin" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_admin", "t"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.4ms)[0m  [1m[32mINSERT INTO "payments" ("user_id", "debit_card_last_four_digits") VALUES (?, ?)[0m  [["user_id", 1], ["debit_card_last_four_digits", "0101"]]
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mOutbox Load (0.6ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[36mInbox Load (0.2ms)[0m  [1m[34mSELECT  "inboxes".* FROM "inboxes" WHERE "inboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 3], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "messages" ("body", "outbox_id", "inbox_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Lost Prescription Request"], ["outbox_id", 1], ["inbox_id", 3], ["created_at", "2020-05-28 07:45:46.433963"], ["updated_at", "2020-05-28 07:45:46.433963"]]
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "inboxes" SET "unread_messages" = COALESCE("unread_messages", 0) + 1 WHERE "inboxes"."id" = ?[0m  [["id", 3]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/messages
+Completed 302 Found in 42ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/messages" for ::1 at 2020-05-28 10:45:46 +0300
+Processing by MessagesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_patient" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_patient", "t"], ["LIMIT", 1]]
+  [1m[36mInbox Load (0.1ms)[0m  [1m[34mSELECT  "inboxes".* FROM "inboxes" WHERE "inboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "messages" WHERE "messages"."inbox_id" = ?[0m  [["inbox_id", 1]]
+  Rendering messages/index.html.erb within layouts/application
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_patient" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_patient", "t"], ["LIMIT", 1]]
+  [1m[36mMessage Load (0.2ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."inbox_id" = ? ORDER BY "messages"."created_at" DESC LIMIT ? OFFSET ?[0m  [["inbox_id", 1], ["LIMIT", 1], ["OFFSET", 0]]
+  [1m[36mOutbox Load (0.2ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered messages/index.html.erb within layouts/application (7.2ms)
+  Rendered navigation/_header.html.erb (0.7ms)
+Completed 200 OK in 39ms (Views: 33.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/messages/1" for ::1 at 2020-05-28 10:45:50 +0300
+Processing by MessagesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mMessage Load (0.2ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering messages/show.html.erb within layouts/application
+  [1m[36mOutbox Load (0.2ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered messages/modals/_lost_prescription_modal.html.erb (0.9ms)
+  Rendered messages/show.html.erb within layouts/application (5.3ms)
+  Rendered navigation/_header.html.erb (0.6ms)
+Completed 200 OK in 30ms (Views: 27.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/messages/1/reply" for ::1 at 2020-05-28 10:45:51 +0300
+Processing by MessagesController#new as HTML
+  Parameters: {"id"=>"1"}
+  Rendering messages/new.html.erb within layouts/application
+  Rendered messages/new.html.erb within layouts/application (11.6ms)
+  Rendered navigation/_header.html.erb (0.8ms)
+Completed 200 OK in 43ms (Views: 41.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/messages" for ::1 at 2020-05-28 10:45:54 +0300
+Processing by MessagesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tqW51RZhbvFxUbRiqupnYG0ik+lV58gNic+hN1CQCyXgeZMxjepDj3L64XVyYHUFI0P9UwFSggl7+qdel6BJIQ==", "original_message_id"=>"1", "message"=>{"body"=>"ывп"}, "commit"=>"Send Message"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_patient" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_patient", "t"], ["LIMIT", 1]]
+  [1m[36mOutbox Load (0.2ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[36mMessage Load (0.2ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mOutbox Load (0.1ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mInbox Load (0.1ms)[0m  [1m[34mSELECT  "inboxes".* FROM "inboxes" WHERE "inboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mInbox Load (0.2ms)[0m  [1m[34mSELECT  "inboxes".* FROM "inboxes" WHERE "inboxes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mOutbox Load (0.1ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.1ms)[0m  [1m[32mINSERT INTO "messages" ("body", "outbox_id", "inbox_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "ывп"], ["outbox_id", 1], ["inbox_id", 2], ["created_at", "2020-05-28 07:45:54.177304"], ["updated_at", "2020-05-28 07:45:54.177304"]]
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "inboxes" SET "unread_messages" = COALESCE("unread_messages", 0) + 1 WHERE "inboxes"."id" = ?[0m  [["id", 2]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/messages
+Completed 302 Found in 24ms (ActiveRecord: 4.0ms)
+
+
+Started GET "/messages" for ::1 at 2020-05-28 10:45:54 +0300
+Processing by MessagesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_patient" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_patient", "t"], ["LIMIT", 1]]
+  [1m[36mInbox Load (0.3ms)[0m  [1m[34mSELECT  "inboxes".* FROM "inboxes" WHERE "inboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "messages" WHERE "messages"."inbox_id" = ?[0m  [["inbox_id", 1]]
+  Rendering messages/index.html.erb within layouts/application
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_patient" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_patient", "t"], ["LIMIT", 1]]
+  [1m[36mMessage Load (0.4ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."inbox_id" = ? ORDER BY "messages"."created_at" DESC LIMIT ? OFFSET ?[0m  [["inbox_id", 1], ["LIMIT", 1], ["OFFSET", 0]]
+  [1m[36mOutbox Load (0.1ms)[0m  [1m[34mSELECT  "outboxes".* FROM "outboxes" WHERE "outboxes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendered messages/index.html.erb within layouts/application (9.6ms)
+  Rendered navigation/_header.html.erb (1.3ms)
+Completed 200 OK in 70ms (Views: 52.3ms | ActiveRecord: 1.5ms)
+
+
