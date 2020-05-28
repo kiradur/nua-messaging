@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+  lost_prescription:
+    default_admin_message: "Lost Prescription Request"
+    success_message: "Your Request Has Been Submitted Successfully"
+    failure_message: "Lost prescription request problem. Please Contact Administrator."
