@@ -1,0 +1,13 @@
+.flash {
+  margin-bottom: .5rem;
+}
+
+.flash-notice {
+  font-size: 0.7rem;
+  color: rgba(0, 255, 0, .8);
+}
+
+.flash-alert {
+  font-size: 0.7rem;
+  color: rgba(255, 0, 0, .8);
+}
