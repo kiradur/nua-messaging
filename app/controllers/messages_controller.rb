@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
   end
 
   def lost_prescription
-    rresult = LostPrescriptionService.new(
+    result = LostPrescriptionService.new(
       issuer: current_user).process
 
     if result[:success]
