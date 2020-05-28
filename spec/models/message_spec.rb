@@ -1,34 +1,38 @@
 require 'rails_helper'
+require_relative '../support/users_helper.rb'
+
+RSpec.configure do |c|
+  c.include UserHelpers
+end
 
 RSpec.describe Message, type: :model do
-  let(:patient) { create :user, :patient }
-  let(:doctor) { create :user, :doctor }
-
-  let(:message) { build :message, {
-    inbox: doctor.inbox,
-    outbox: patient.outbox }
-  }
-
-  context 'Unread Message' do
-    it 'triggers inbox unread messages callback' do
-      expect(message).to receive(:increment_inbox_unread_messages_counter)
-      message.save
-    end
-
-    it 'increment inbox unread message counter' do
-      expect{ message.save }.to change { doctor.inbox.reload.unread_messages }.from(0).to(1)
-    end
+  before :each do
+    create_users
+    @message = Message.create(body: 'New message', inbox: @doctor.inbox, outbox: @patient.outbox)
   end
 
-  context 'Read Message' do
-    it 'updates read status to true' do
-      message.save
-      expect{ message.send(:mark_as_read) }.to change { message.reload.read }.from(false).to(true)
-    end
+  it 'creates new message' do
+    expect(Message.last).to eql(@message)
+  end
 
-    it 'decrements inbox unread message counter' do
-      message.save
-      expect{ message.mark_as_read }.to change { doctor.inbox.reload.unread_messages }.from(1).to(0)
-    end
+  it 'has status unred' do
+    expect(Message.last.read).to eql(false)
+  end
+
+  it 'is sent to corrent inbox' do
+    expect(Message.last.inbox).to eql(@doctor.inbox)
+  end
+
+  it 'is sent to corrent outbox' do
+    expect(Message.last.outbox).to eql(@patient.outbox)
+  end
+
+  it 'increments doctors new messages in inbox' do
+    expect(@doctor.inbox.new_messages).to eql(1)
+  end
+
+  it 'decrements doctors new messages in inbox after the message is read' do
+    @message.update(read: true)
+    expect(@doctor.inbox.new_messages).to eql(0)
   end
 end
