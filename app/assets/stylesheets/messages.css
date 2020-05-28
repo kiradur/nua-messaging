@@ -1,3 +1,22 @@
+.messages-top-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unread-messages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: #fff;
+  background: rgba(255,0,0, .5);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+}
+
 .pagination-list {
   display: none;
 }
