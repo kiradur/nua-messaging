@@ -88,3 +88,60 @@ Migrating to CreateUsersMessagesInboxesOutboxesAndPayments (20190626153436)
   [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
   [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "messages" ("body", "outbox_id", "inbox_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["body", "Thanks for your order. I will in touch shortly after reviewing your treatment application."], ["outbox_id", 2], ["inbox_id", 1], ["created_at", "2020-05-28 05:50:16.975410"], ["updated_at", "2020-05-28 05:50:16.975410"]]
   [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/" for ::1 at 2020-05-28 09:30:41 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MessagesController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_doctor" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_doctor", "t"], ["LIMIT", 1]]
+  [1m[36mInbox Load (0.7ms)[0m  [1m[34mSELECT  "inboxes".* FROM "inboxes" WHERE "inboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 2], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "messages" WHERE "messages"."inbox_id" = ?[0m  [["inbox_id", 2]]
+  Rendering messages/index.html.erb within layouts/application
+  [1m[36mMessage Load (0.2ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."inbox_id" = ? ORDER BY "messages"."created_at" DESC LIMIT ? OFFSET ?[0m  [["inbox_id", 2], ["LIMIT", 9], ["OFFSET", 0]]
+  Rendered messages/index.html.erb within layouts/application (134.0ms)
+Completed 500 Internal Server Error in 206ms (ActiveRecord: 3.4ms)
+
+
+  
+ActionView::Template::Error (undefined method `pagy_bulma_nav' for #<#<Class:0x00007f8d50301850>:0x00007f8d5030aef0>):
+    15:   <small class="d-block text-right mt-3">
+    16:     <a href="#">All updates</a>
+    17:   </small>
+    18:   <%= pagy_bulma_nav(@pagy).html_safe %>
+    19: </div>
+  
+app/views/messages/index.html.erb:18:in `_app_views_messages_index_html_erb__81590727041520213_70122456224360'
+  Rendering /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (16.0ms)
+  Rendering /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendering /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (44.3ms)
+Started GET "/" for ::1 at 2020-05-28 09:33:18 +0300
+Processing by MessagesController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."is_doctor" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["is_doctor", "t"], ["LIMIT", 1]]
+  [1m[36mInbox Load (0.5ms)[0m  [1m[34mSELECT  "inboxes".* FROM "inboxes" WHERE "inboxes"."user_id" = ? LIMIT ?[0m  [["user_id", 2], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "messages" WHERE "messages"."inbox_id" = ?[0m  [["inbox_id", 2]]
+  Rendering messages/index.html.erb within layouts/application
+  [1m[36mMessage Load (0.2ms)[0m  [1m[34mSELECT  "messages".* FROM "messages" WHERE "messages"."inbox_id" = ? ORDER BY "messages"."created_at" DESC LIMIT ? OFFSET ?[0m  [["inbox_id", 2], ["LIMIT", 9], ["OFFSET", 0]]
+  Rendered messages/index.html.erb within layouts/application (124.1ms)
+Completed 500 Internal Server Error in 160ms (ActiveRecord: 3.2ms)
+
+
+  
+ActionView::Template::Error (undefined method `pagy_bulma_nav' for #<#<Class:0x00007f8d4d13b1b8>:0x00007f8d4d13a0d8>):
+    15:   <small class="d-block text-right mt-3">
+    16:     <a href="#">All updates</a>
+    17:   </small>
+    18:   <%= pagy_bulma_nav(@pagy).html_safe %>
+    19: </div>
+  
+app/views/messages/index.html.erb:18:in `_app_views_messages_index_html_erb__81590727041520213_70122430127240'
+  Rendering /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.3ms)
+  Rendering /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.2ms)
+  Rendering /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/kirillvoitulevich/.rvm/gems/ruby-2.6.0/gems/actionpack-5.0.7.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (26.9ms)

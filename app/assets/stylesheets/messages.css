@@ -1,0 +1,8 @@
+.pagination-list {
+  display: none;
+}
+
+.pagy-bulma-nav {
+  padding: 1rem;
+  justify-content: space-between;
+}
