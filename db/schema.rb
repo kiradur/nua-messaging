@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200528064611) do
+ActiveRecord::Schema.define(version: 20200528071641) do
 
   create_table "inboxes", force: :cascade do |t|
     t.integer "user_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20200528064611) do
 
   create_table "payments", force: :cascade do |t|
     t.integer "user_id"
+    t.string  "debit_card_last_four_digits"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 

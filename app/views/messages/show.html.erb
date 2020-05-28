@@ -6,6 +6,11 @@
   <div class="card-body">
     <p class="card-text"><%= @message.body %></p>
     <%= link_to "Reply", new_message_path(id: @message.id), class: "btn btn-primary" %>
-    <a href="#" class="btn btn-primary">I've lost my prescription</a>
+    <a href="#" class="btn btn-primary" data-micromodal-trigger="lost-prescription-modal">I've lost my prescription</a>
+    <% flash.each do |key, value| %>
+      <div class="flash flash-<%= key %>"><%= value %></div>
+    <% end %>
   </div>
 </div>
+
+<%= render partial: "messages/modals/lost_prescription_modal"  %>

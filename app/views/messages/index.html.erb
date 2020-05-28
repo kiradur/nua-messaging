@@ -1,6 +1,9 @@
 <div class="my-3 p-3 bg-white rounded shadow-sm">
   <div class="border-bottom border-gray pb-2 mb-0 messages-top-info">
     <h6> Inbox </h6>
+    <% flash.each do |key, value| %>
+      <div class="flash flash-<%= key %>"><%= value %></div>
+    <% end %>
     <% if current_user.is_doctor? %>
       <span class="unread-messages">
         <%= current_user.inbox.unread_messages %>

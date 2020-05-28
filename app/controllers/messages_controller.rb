@@ -25,6 +25,19 @@ class MessagesController < ApplicationController
     end
   end
 
+  def lost_prescription
+    result = LostPrescriptionService.new(
+      issuer: current_user).process
+
+    if result[:success]
+      redirect_to messages_path
+      flash[:notice] = LostPrescriptionService::SUCCESS_MESSAGE
+    else
+      redirect_to message_path(params[:id])
+      flash[:alert] = LostPrescriptionService::FAILURE_MESSAGE
+    end
+  end
+
   private
 
   def get_user_messages

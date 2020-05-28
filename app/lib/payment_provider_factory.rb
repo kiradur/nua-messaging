@@ -3,5 +3,7 @@ class PaymentProviderFactory
     @provider ||= Provider.new
   end
 
-  def debit_card(user) end;
+  def debit_card(user) 
+    '0101010101010101'
+  end
 end
